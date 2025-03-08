@@ -16,19 +16,24 @@ interface FetchProductResponse {
 const ProductGrid = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get<FetchProductResponse>("https://dummyjson.com/products")
       .then((response) => {
+        setLoading(false);
         setProducts(response.data.products);
       })
       .catch((error) => {
         if (error instanceof CanceledError) return;
         setError((error as AxiosError).message);
+        setLoading(false);
       });
   }, []);
 
+  if (isLoading) return <span className="loading loading-spinner loading-md" />;
   if (error) return <p className="text-red-500">{error}</p>;
 
   return (
