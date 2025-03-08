@@ -1,29 +1,7 @@
-import { useEffect, useState } from "react";
-import createAPIClient from "../services/apiClient";
-import { CanceledError, type AxiosError } from "axios";
+import useProductCategoryList from "../hooks/useProductCategoryList";
 
 const ProductCategoryList = () => {
-  const [categories, setCategories] = useState<string[]>([]);
-  const [error, setError] = useState("");
-  const [isLoading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const { request, cancel } = createAPIClient<string[]>(
-      "/products/category-list"
-    ).getAll();
-    setLoading(true);
-    request
-      .then((response) => {
-        setLoading(false);
-        setCategories(response.data);
-      })
-      .catch((error) => {
-        if (error instanceof CanceledError) return;
-        setError((error as AxiosError).message);
-        setLoading(false);
-      });
-    return () => cancel();
-  }, []);
+  const { categories, error, isLoading } = useProductCategoryList();
 
   if (isLoading)
     return <span className="loading loaing-spinner laoding-md"></span>;
