@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import ProductGrid from "./components/ProductGrid";
+import ProductCategoryList from "./components/ProductCategoryList";
 
 function App() {
   const [on, setOn] = useState(false);
@@ -21,27 +22,7 @@ function App() {
           on ? "translate-x-0" : "-translate-x-full"
         } lg:relative lg:translate-x-0`}
       >
-        <h2 className="text-lg font-bold">Categories</h2>
-        <ul className="menu p-2 rounded-box">
-          <li>
-            <a>All Products</a>
-          </li>
-          <li>
-            <a>Smartphones</a>
-          </li>
-          <li>
-            <a>Laptops</a>
-          </li>
-          <li>
-            <a>Fragrances</a>
-          </li>
-          <li>
-            <a>Skincare</a>
-          </li>
-          <li>
-            <a>Groceries</a>
-          </li>
-        </ul>
+        <ProductCategoryList />
       </aside>
       <main className="p-2 m-auto">
         <h2 className="text-3xl text-sky-400 mb-3 font-bold">Products</h2>
