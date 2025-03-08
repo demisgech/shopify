@@ -1,44 +1,11 @@
-import axios, { CanceledError, type AxiosError } from "axios";
-import { useEffect, useState } from "react";
+import useProducts from "../hooks/useProducts";
 import ProductCard from "./ProductCard";
 
-interface Product {
-  id: number;
-  title: string;
-  description: string;
-  thumbnail: string;
-}
-
-interface FetchProductResponse {
-  products: Product[];
-}
-
 const ProductGrid = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [error, setError] = useState("");
-  const [isLoading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const controller = new AbortController();
-    setLoading(true);
-    axios
-      .get<FetchProductResponse>("https://dummyjson.com/products", {
-        signal: controller.signal,
-      })
-      .then((response) => {
-        setLoading(false);
-        setProducts(response.data.products);
-      })
-      .catch((error) => {
-        if (error instanceof CanceledError) return;
-        setError((error as AxiosError).message);
-        setLoading(false);
-      });
-
-    return () => controller.abort();
-  }, []);
+  const { products, error, isLoading } = useProducts();
 
   if (isLoading) return <span className="loading loading-spinner loading-md" />;
+
   if (error) return <p className="text-red-500">{error}</p>;
 
   return (
