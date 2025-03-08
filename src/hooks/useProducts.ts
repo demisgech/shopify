@@ -1,5 +1,6 @@
-import axios, { CanceledError, type AxiosError } from "axios";
+import { CanceledError, type AxiosError } from "axios";
 import { useEffect, useState } from "react";
+import createAPIClient from "../services/apiClient";
 
 interface Product {
   id: number;
@@ -18,12 +19,11 @@ const useProducts = () => {
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
-    const controller = new AbortController();
+    const { request, cancel } =
+      createAPIClient<FetchProductResponse>("/products").getAll();
+
     setLoading(true);
-    axios
-      .get<FetchProductResponse>("https://dummyjson.com/products", {
-        signal: controller.signal,
-      })
+    request
       .then((response) => {
         setLoading(false);
         setProducts(response.data.products);
@@ -34,7 +34,7 @@ const useProducts = () => {
         setLoading(false);
       });
 
-    return () => controller.abort();
+    return () => cancel();
   }, []);
 
   return { products, error, isLoading };
