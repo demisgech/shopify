@@ -19,9 +19,12 @@ const ProductGrid = () => {
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
+    const controller = new AbortController();
     setLoading(true);
     axios
-      .get<FetchProductResponse>("https://dummyjson.com/products")
+      .get<FetchProductResponse>("https://dummyjson.com/products", {
+        signal: controller.signal,
+      })
       .then((response) => {
         setLoading(false);
         setProducts(response.data.products);
@@ -31,6 +34,8 @@ const ProductGrid = () => {
         setError((error as AxiosError).message);
         setLoading(false);
       });
+
+    return () => controller.abort();
   }, []);
 
   if (isLoading) return <span className="loading loading-spinner loading-md" />;
