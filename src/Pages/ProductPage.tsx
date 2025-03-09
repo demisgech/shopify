@@ -32,7 +32,9 @@ const ProductPage = ({ isOpen }: Props) => {
         />
       </aside>
       <main className="p-2 m-auto">
-        <h2 className="text-3xl text-sky-400 mb-5 ml-5 font-bold">Products</h2>
+        <h2 className="text-3xl text-sky-400 mb-5 ml-5 font-bold">
+          {selectedCategory ? selectedCategory : ""} products
+        </h2>
         <ProductGrid {...productQuery} />
       </main>
     </>
