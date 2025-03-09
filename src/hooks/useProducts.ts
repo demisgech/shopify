@@ -2,7 +2,7 @@ import { CanceledError, type AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import createAPIClient from "../services/apiClient";
 
-interface Product {
+export interface Product {
   id: number;
   title: string;
   description: string;
@@ -13,14 +13,15 @@ interface FetchProductResponse {
   products: Product[];
 }
 
-const useProducts = () => {
+const useProducts = (category?: string) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
+    const endpoint = category ? `/products/category/${category}` : `/products`;
     const { request, cancel } =
-      createAPIClient<FetchProductResponse>("/products").getAll();
+      createAPIClient<FetchProductResponse>(endpoint).getAll();
 
     setLoading(true);
     request
@@ -35,7 +36,7 @@ const useProducts = () => {
       });
 
     return () => cancel();
-  }, []);
+  }, [category]);
 
   return { products, error, isLoading };
 };

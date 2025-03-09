@@ -16,7 +16,6 @@ const ProductCard = ({ product }: Props) => {
 
       <div className="card-body">
         <h3 className="card-title">{product.title}</h3>
-        <p>{product.description}</p>
         <div className="card-actions justify-center">
           <button className="btn btn-primary">Details</button>
         </div>
