@@ -9,16 +9,19 @@ const ProductCategoryList = () => {
   if (error) return <p className="text-red-500">{error}</p>;
 
   return (
-    <ul className="menu list bg-base-100 rounded-box shadow-md">
+    <div>
       <h3 className="p-3 pb-2 font-bold text-lg tracking-wide opacity-60">
         Category list
       </h3>
-      {categories.map((category, index) => (
-        <li key={index} className="pb-1">
-          <a className="text-lg">{category}</a>
-        </li>
-      ))}
-    </ul>
+      <select className="select select-md">
+        <option value="">Select category</option>
+        {categories.map((category, index) => (
+          <option key={index} className="pb-1">
+            {category}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 };
 
