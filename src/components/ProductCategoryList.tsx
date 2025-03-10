@@ -1,23 +1,14 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useContext } from "react";
+import CategoryContext from "../contexts/categoryContext";
+import useProductCategoryList from "../hooks/useProductCategoryList";
 
-interface Props {
-  categories: string[];
-  error: string;
-  isLoading: boolean | false;
-  category: string;
-  onSelect: (category: string) => void;
-}
+const ProductCategoryList = () => {
+  const { categories, error, isLoading } = useProductCategoryList();
 
-const ProductCategoryList = ({
-  onSelect,
-  category,
-  categories,
-  error,
-  isLoading,
-}: Props) => {
+  const { category, setCategory } = useContext(CategoryContext);
   const onChange = (event: ChangeEvent<HTMLSelectElement>) => {
     event.preventDefault();
-    onSelect(event.target.value);
+    setCategory(event.target.value);
   };
 
   if (isLoading)

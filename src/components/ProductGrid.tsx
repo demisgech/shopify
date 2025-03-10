@@ -1,13 +1,12 @@
-import { Product } from "../hooks/useProducts";
+import { useContext } from "react";
+import useProducts from "../hooks/useProducts";
 import ProductCard from "./ProductCard";
+import CategoryContext from "../contexts/categoryContext";
 
-interface Props {
-  products: Product[];
-  error: string;
-  isLoading: boolean | false;
-}
+const ProductGrid = () => {
+  const { category } = useContext(CategoryContext);
+  const { products, error, isLoading } = useProducts(category);
 
-const ProductGrid = ({ products, error, isLoading }: Props) => {
   if (isLoading) return <span className="loading loading-spinner loading-md" />;
 
   if (error) return <p className="text-red-500">{error}</p>;
