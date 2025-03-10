@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
 import cartLogo from "../assets/cartlogo.png";
+import CartContext from "../contexts/cartContext";
 
 const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
+  const { cart } = useContext(CartContext);
 
   return (
     <nav className="navbar bg-base-100 shadow-sm">
@@ -35,7 +37,7 @@ const Navbar = () => {
             className="w-[30px] h-[30px] object-cover"
           />
           <span className="badge badge-error badge-sm text-white rounded-full indicator-item">
-            8
+            {cart.length}
           </span>
         </div>
       </Link>

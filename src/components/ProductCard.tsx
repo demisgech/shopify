@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import CartContext from "../contexts/cartContext";
+
 interface Product {
   id: number;
   title: string;
@@ -10,6 +13,8 @@ interface Props {
 }
 
 const ProductCard = ({ product }: Props) => {
+  const { addToCart } = useContext(CartContext);
+
   return (
     <div className="card bg-base-50 shadow-lg max-w-[500px]">
       <img src={product.thumbnail} className="h-55 object-cover" alt="Shoes" />
@@ -17,7 +22,12 @@ const ProductCard = ({ product }: Props) => {
       <div className="card-body">
         <h3 className="card-title">{product.title}</h3>
         <div className="card-actions justify-center">
-          <button className="btn btn-primary">Details</button>
+          <button
+            onClick={() => addToCart(product)}
+            className="btn btn-primary"
+          >
+            Add to Cart
+          </button>
         </div>
       </div>
     </div>
