@@ -1,10 +1,9 @@
 import { createContext } from "react";
-import type { CartItem } from "../components/CartCard";
-import type { Product } from "../hooks/useProducts";
+import { Product } from "../hooks/useProducts";
 
 interface CartContextType {
-  cart: CartItem[];
-  addToCart: (product: Product) => void;
+  cart: Product[];
+  addToCart: (cartItem: Product | ((prevCart: Product[]) => Product[])) => void;
 }
 
 const CartContext = createContext<CartContextType>({} as CartContextType);

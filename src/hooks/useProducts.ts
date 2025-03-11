@@ -1,13 +1,15 @@
 // import { CanceledError, type AxiosError } from "axios";
 // import { useEffect, useState } from "react";
 import createAPIClient from "../services/apiClient";
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 export interface Product {
   id: number;
   title: string;
   description: string;
+  price: number;
   thumbnail: string;
+  quantity: number;
 }
 
 interface FetchProductResponse {
@@ -49,6 +51,8 @@ const useProducts = (category?: string) => {
         createAPIClient<FetchProductResponse>(endpoint).getAll();
       return request.then((response) => response.data);
     },
+    gcTime: 1000 * 60 * 60 * 24, // 24h
+    placeholderData: keepPreviousData,
   });
 
   // return { products, error, isLoading };
