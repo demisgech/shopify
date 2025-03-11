@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import CartContext from "../contexts/cartContext";
+import useCartStore from "../contexts/useCartStore";
 import useProductStore from "../contexts/useProductStore";
 import { Product } from "../hooks/useProducts";
 
@@ -8,7 +7,7 @@ interface Props {
 }
 
 const ProductCard = ({ product }: Props) => {
-  const { addToCart } = useContext(CartContext);
+  const addToCart = useCartStore((selector) => selector.addToCart);
   const {
     addedProducts,
     addProduct,

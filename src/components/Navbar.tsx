@@ -1,15 +1,15 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import cartLogo from "../assets/cartlogo.png";
-import CartContext from "../contexts/cartContext";
+import useCartStore from "../contexts/useCartStore";
 
 const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
-  const { cart } = useContext(CartContext);
+  const cart = useCartStore((selector) => selector.cart);
 
   return (
-    <nav className="navbar bg-base-100 shadow-sm">
+    <nav className="navbar fixed top-0 right-0 left-0 z-50 bg-base-100 shadow-sm">
       <div className="flex-1 gap-2">
         <Link to="/" className="btn btn-ghost text-xl">
           Shopify
