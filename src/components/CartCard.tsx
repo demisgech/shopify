@@ -1,4 +1,4 @@
-import useProductStore from "../contexts/useProductStore";
+import useProductStore from "../store/useProductStore";
 import type { Product } from "../hooks/useProducts";
 
 interface Props {

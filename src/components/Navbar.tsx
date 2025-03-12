@@ -2,14 +2,17 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import cartLogo from "../assets/cartlogo.png";
-import useCartStore from "../contexts/useCartStore";
+import useProductStore from "../store/useProductStore";
 
 const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
-  const cart = useCartStore((selector) => selector.cart);
-
+  const addedProducts = useProductStore((selector) => selector.addedProducts);
+  const totalQuantity = addedProducts.reduce(
+    (totalQuantity, product) => totalQuantity + product.quantity,
+    0
+  );
   return (
-    <nav className="navbar fixed top-0 right-0 left-0 z-50 bg-base-100 shadow-sm">
+    <nav className="navbar sticky top-0 z-50 bg-base-100 shadow-sm">
       <div className="flex-1 gap-2">
         <Link to="/" className="btn btn-ghost text-xl">
           Shopify
@@ -18,7 +21,7 @@ const Navbar = () => {
 
       <div className="hidden lg:flex space-x-6">
         <Link to="/">Home</Link>
-        <Link to="/carts">Cart</Link>
+        <Link to="/checkout">Checkout</Link>
         <Link to="/products">Products</Link>
         <div className="bordered">
           <input
@@ -37,7 +40,7 @@ const Navbar = () => {
             className="w-[30px] h-[30px] object-cover"
           />
           <span className="badge badge-error badge-sm text-white rounded-full indicator-item">
-            {cart.length}
+            {totalQuantity}
           </span>
         </div>
       </Link>
@@ -58,11 +61,11 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              to="/carts"
+              to="/checkout"
               className="block py-2"
               onClick={() => setOpen(false)}
             >
-              Cart
+              Checkout
             </Link>
           </li>
           <li>

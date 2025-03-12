@@ -1,5 +1,5 @@
-import useCartStore from "../contexts/useCartStore";
-import useProductStore from "../contexts/useProductStore";
+import useCartStore from "../store/useCartStore";
+import useProductStore from "../store/useProductStore";
 import { Product } from "../hooks/useProducts";
 
 interface Props {

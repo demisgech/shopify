@@ -1,4 +1,4 @@
-import useCartStore from "../contexts/useCartStore";
+import useCartStore from "../store/useCartStore";
 import CartCard from "./CartCard";
 
 const CartGrid = () => {
