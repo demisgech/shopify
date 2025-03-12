@@ -1,13 +1,11 @@
-import useCartStore from "../store/useCartStore";
-import useProductStore from "../store/useProductStore";
 import { Product } from "../hooks/useProducts";
+import useProductStore from "../store/useProductStore";
 
 interface Props {
   product: Product;
 }
 
 const ProductCard = ({ product }: Props) => {
-  const addToCart = useCartStore((selector) => selector.addToCart);
   const {
     addedProducts,
     addProduct,
@@ -20,41 +18,19 @@ const ProductCard = ({ product }: Props) => {
   );
 
   const onIncrement = (id: number) => {
-    addToCart((prevCart) =>
-      prevCart.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              quantity: item.quantity + 1,
-            }
-          : item
-      )
-    );
     increaseProduct(id);
   };
 
   const onDecrement = (id: number) => {
-    addToCart((prevCart) =>
-      prevCart
-        .map((item) =>
-          item.id === id
-            ? {
-                ...item,
-                quantity: item.quantity - 1,
-              }
-            : item
-        )
-        .filter((item) => item.quantity > 0)
-    );
     const addedProduct = addedProducts.find((product) => product.id === id);
     if (addedProduct && addedProduct.quantity > 1) decreaseProduct(id);
     else removeProduct(id);
   };
 
   const handAddToCart = () => {
-    addToCart((prevCart) => [...prevCart, { ...product, quantity: 1 }]);
     addProduct({ ...product, quantity: 1 });
   };
+
   return (
     <div className="card bg-base-50 shadow-lg max-w-[500px]">
       <img src={product.thumbnail} className="h-55 object-cover" alt="Shoes" />
