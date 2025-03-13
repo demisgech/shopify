@@ -37,6 +37,7 @@ const ProductCard = ({ product }: Props) => {
 
       <div className="card-body">
         <h3 className="card-title">{product.title}</h3>
+        <span>${product.price}</span>
         <div className="card-actions justify-center">
           {isAdded ? (
             <div className="flex gap-1">

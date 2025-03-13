@@ -6,13 +6,8 @@ interface Props {
 }
 
 const CartCard = ({ product }: Props) => {
-  const {
-    isCartPage,
-    addedProducts,
-    increaseProduct,
-    decreaseProduct,
-    removeProduct,
-  } = useProductStore();
+  const { addedProducts, increaseProduct, decreaseProduct, removeProduct } =
+    useProductStore();
   const updatedProduct =
     addedProducts.find((prod) => prod.id === product.id) || product;
 
@@ -45,16 +40,14 @@ const CartCard = ({ product }: Props) => {
           <span className="badge badge-secondary">${totalPrice}</span>
           <span className="badge badge-success">{updatedProduct.quantity}</span>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-row justify-around items-center gap-2">
           <button
             className="btn btn-primary"
             onClick={() => onDecrement(updatedProduct.id)}
           >
             -
           </button>
-          <button className="btn btn-primary" disabled={isCartPage}>
-            Add to Cart
-          </button>
+          <span className="text-center">{updatedProduct.quantity}</span>
           <button
             className="btn btn-primary"
             onClick={() => {
