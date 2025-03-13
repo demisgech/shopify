@@ -12,7 +12,7 @@ export default function HomePage() {
               <h1 className="text-6xl bg-linear-to-bl from-violet-800 to-green-300 text-blue-650 bg-clip-text text-transparent sm:mb-5">
                 Shop Smarter, Live Better – Discover the Best Deals Today!
               </h1>
-              <p className="py-6">
+              <p className="py-6 text-xl">
                 Find the best deals on top-quality products at unbeatable
                 prices. Shop smarter with curated collections, exclusive
                 discounts, and fast shipping—because you deserve the best
