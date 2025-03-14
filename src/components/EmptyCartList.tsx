@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import emptyCartImage from "../assets/emptycart.webp";
 
 const EmptyCartList = () => {
@@ -12,7 +13,9 @@ const EmptyCartList = () => {
           Looks like you haven't added anything to your cart. Go ahead & explore
           top categories
         </p>
-        <button className="btn btn-primary">Get Started</button>
+        <Link className="btn btn-primary" to="/products">
+          Get Started
+        </Link>
       </div>
     </div>
   );

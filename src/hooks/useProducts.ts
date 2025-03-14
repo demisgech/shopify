@@ -1,7 +1,7 @@
 // import { CanceledError, type AxiosError } from "axios";
 // import { useEffect, useState } from "react";
+import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 import createAPIClient from "../services/apiClient";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 export interface Product {
   id: number;
@@ -14,6 +14,9 @@ export interface Product {
 
 interface FetchProductResponse {
   products: Product[];
+  skip: number;
+  limit: number;
+  total: number;
 }
 
 const useProducts = (category?: string) => {
@@ -41,18 +44,29 @@ const useProducts = (category?: string) => {
 
   // return () => cancel();
 
-  return useQuery<FetchProductResponse, Error>({
+  return useInfiniteQuery<FetchProductResponse, Error>({
     queryKey: ["products", category],
-    queryFn: () => {
+    queryFn: ({ pageParam = 1 }) => {
       const endpoint = category
         ? `/products/category/${category}`
         : `/products`;
-      const { request } =
-        createAPIClient<FetchProductResponse>(endpoint).getAll();
+      const { request } = createAPIClient<FetchProductResponse>(
+        endpoint
+      ).getAll({
+        params: {
+          skip: pageParam,
+          limit: 20,
+        },
+      });
       return request.then((response) => response.data);
     },
     gcTime: 1000 * 60 * 60 * 24, // 24h
     placeholderData: keepPreviousData,
+    getNextPageParam: (lastPage) => {
+      const nextSkip = lastPage.skip + lastPage.limit;
+      return nextSkip < lastPage.total ? nextSkip : undefined;
+    },
+    initialPageParam: 0,
   });
 
   // return { products, error, isLoading };

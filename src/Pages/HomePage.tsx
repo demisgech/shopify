@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import banner from "../assets/wallpaper-ecommerce-web-portal.webp";
 import Footer from "../components/Footer";
 
@@ -18,7 +19,9 @@ export default function HomePage() {
                 discounts, and fast shipping—because you deserve the best
                 without overspending!
               </p>
-              <button className="btn btn-primary">Get Started</button>
+              <Link to="/products" className="btn btn-primary">
+                Get Started
+              </Link>
             </div>
           </div>
         </div>

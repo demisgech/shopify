@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 
 const axiosInstance = axios.create({
   baseURL: "https://dummyjson.com",
@@ -7,11 +7,9 @@ const axiosInstance = axios.create({
 class APICLient<T> {
   public constructor(private endpoint: string) {}
 
-  public getAll = () => {
+  public getAll = (config?: AxiosRequestConfig<T> | undefined) => {
     const controller = new AbortController();
-    const request = axiosInstance.get<T>(this.endpoint, {
-      signal: controller.signal,
-    });
+    const request = axiosInstance.get<T>(this.endpoint, config);
 
     return { request, cancel: () => controller.abort() };
   };
