@@ -4,14 +4,22 @@ const axiosInstance = axios.create({
   baseURL: "https://dummyjson.com",
 });
 
+export interface FetchProductResponse<T> {
+  products: T[];
+  skip: number;
+  limit: number;
+  total: number;
+}
+
 class APICLient<T> {
   public constructor(private endpoint: string) {}
 
-  public getAll = (config?: AxiosRequestConfig<T> | undefined) => {
-    const controller = new AbortController();
-    const request = axiosInstance.get<T>(this.endpoint, config);
-
-    return { request, cancel: () => controller.abort() };
+  public getAll = async (config?: AxiosRequestConfig<T> | undefined) => {
+    const response = await axiosInstance.get<FetchProductResponse<T>>(
+      this.endpoint,
+      config
+    );
+    return response.data;
   };
 }
 
