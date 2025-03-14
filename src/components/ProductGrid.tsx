@@ -1,13 +1,11 @@
-import { Fragment, useContext } from "react";
-import useProducts from "../hooks/useProducts";
-import ProductCard from "./ProductCard";
-import CategoryContext from "../contexts/categoryContext";
-import ProductCardContainer from "./ProductCardContainer";
+import { Fragment } from "react";
 import useInfiniteScroll from "../hooks/useInfiniteScroll";
+import useProducts from "../hooks/useProducts";
 import Box from "./Box";
+import ProductCard from "./ProductCard";
+import ProductCardContainer from "./ProductCardContainer";
 
 const ProductGrid = () => {
-  const { category } = useContext(CategoryContext);
   const {
     data,
     error,
@@ -15,7 +13,7 @@ const ProductGrid = () => {
     isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
-  } = useProducts(category);
+  } = useProducts();
   const { lastItemRef } = useInfiniteScroll({
     isFetchingNextPage,
     hasNextPage,

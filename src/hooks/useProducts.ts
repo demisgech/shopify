@@ -1,16 +1,27 @@
 import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 import { FetchProductResponse } from "../services/apiClient";
 import productService, { Product } from "../services/productService";
+import useProductQueryStore, {
+  ProductQuery,
+} from "../store/useProductQueryStore";
 
-const useProducts = (category?: string) => {
+const useProducts = () => {
+  const { productQuery } = useProductQueryStore();
+
+  const determineEndpoint = (productQuery: ProductQuery) => {
+    if (productQuery.category)
+      return "/products/category/" + productQuery.category;
+    if (productQuery.q) return "/products/search";
+    return "/products";
+  };
+
   return useInfiniteQuery<FetchProductResponse<Product>, Error>({
-    queryKey: ["products", category],
+    queryKey: ["products", productQuery],
     queryFn: ({ pageParam = 1, signal }) => {
-      const endpoint = category
-        ? `/products/category/${category}`
-        : `/products`;
+      const endpoint = determineEndpoint(productQuery);
       return productService(endpoint).getAll({
         params: {
+          ...productQuery,
           skip: pageParam,
           limit: 20,
         },

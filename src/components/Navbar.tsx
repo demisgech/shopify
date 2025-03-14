@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import cartLogo from "../assets/cartlogo.png";
 import useProductStore from "../store/useProductStore";
+import SearchInput from "./SearchInput";
 
 const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
@@ -24,11 +25,7 @@ const Navbar = () => {
         <Link to="/checkout">Checkout</Link>
         <Link to="/products">Products</Link>
         <div className="bordered">
-          <input
-            type="search"
-            className="input outline-0"
-            placeholder="Search ..."
-          />
+          <SearchInput />
         </div>
       </div>
 
@@ -79,11 +76,7 @@ const Navbar = () => {
           </li>
           <li>
             <div className="bordered">
-              <input
-                type="search"
-                className="input outline-0"
-                placeholder="Search ..."
-              />
+              <SearchInput />
             </div>
           </li>
         </ul>

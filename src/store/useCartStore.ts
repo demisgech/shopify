@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Product } from "../hooks/useProducts";
+import { Product } from "../services/productService";
 
 interface CartStoreType {
   cart: Product[];

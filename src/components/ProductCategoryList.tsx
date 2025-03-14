@@ -1,11 +1,14 @@
-import { ChangeEvent, useContext } from "react";
-import CategoryContext from "../contexts/categoryContext";
+import { ChangeEvent } from "react";
 import useProductCategoryList from "../hooks/useProductCategoryList";
+import useProductQueryStore from "../store/useProductQueryStore";
 
 const ProductCategoryList = () => {
   const { categories, error, isLoading } = useProductCategoryList();
 
-  const { category, setCategory } = useContext(CategoryContext);
+  const {
+    productQuery: { category },
+    setCategory,
+  } = useProductQueryStore();
   const onChange = (event: ChangeEvent<HTMLSelectElement>) => {
     event.preventDefault();
     setCategory(event.target.value);
