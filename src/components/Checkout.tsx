@@ -14,21 +14,19 @@ const Checkout = () => {
     0
   );
   return (
-    <div className="m-auto card bg-base-300 max-w-[400px] min-w-[300px] mt-10 h-[50vh] p-5 align-middle shadow-2xl rounded-2xl">
-      <div className="flex justify-between mb-10 mt-30">
-        <span className="text-2xl">Total Price</span>
-        <span className="text-lg">${totalPrice}</span>
+    <div className="w-full max-w-md mx-auto">
+      <div className="card shadow-lg bg-white p-6">
+        <p className="text-lg font-semibold mb-2">Total Price: ${totalPrice}</p>
+        <p className="text-lg font-semibold mb-6">
+          Total Items: {totalQuantity}
+        </p>
+        <Link
+          to="/login"
+          className="btn btn-success btn-block text-white text-xl"
+        >
+          Check out
+        </Link>
       </div>
-      <div className="flex justify-between mb-10">
-        <span className="text-2xl">total Items</span>
-        <span className="text-lg">{totalQuantity}</span>
-      </div>
-      <Link
-        to="/login"
-        className="btn btn-success btn-block text-white text-xl"
-      >
-        Check out
-      </Link>
     </div>
   );
 };
