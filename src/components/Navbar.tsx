@@ -21,12 +21,14 @@ const Navbar = () => {
       </div>
 
       <div className="hidden lg:flex space-x-6">
-        <Link to="/">Home</Link>
         <Link to="/checkout">Checkout</Link>
         <Link to="/products">Products</Link>
         <div className="bordered">
           <SearchInput />
         </div>
+        <Link to="/login" className="btn btn-success text-lg text-white">
+          Log in
+        </Link>
       </div>
 
       <Link to="/carts" className="border-1 border-cyan-200 rounded-sm mx-4">
@@ -52,11 +54,6 @@ const Navbar = () => {
       {isOpen && (
         <ul className="menu menu-sm absolute top-16 right-1 shadow-md p-4 w-50 bg-white rounded-lg z-10 lg:hidden">
           <li>
-            <Link to="/" className="block py-2" onClick={() => setOpen(false)}>
-              Home
-            </Link>
-          </li>
-          <li>
             <Link
               to="/checkout"
               className="block py-2"
@@ -75,9 +72,18 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <div className="bordered">
+            <div className="bordered my-3">
               <SearchInput />
             </div>
+          </li>
+          <li>
+            <Link
+              to="/login"
+              className="block py-2 btn btn-success text-white btn-block"
+              onClick={() => setOpen(false)}
+            >
+              Log in
+            </Link>
           </li>
         </ul>
       )}

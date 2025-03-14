@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import useProductStore from "../store/useProductStore";
 
 const Checkout = () => {
@@ -22,9 +23,12 @@ const Checkout = () => {
         <span className="text-2xl">total Items</span>
         <span className="text-lg">{totalQuantity}</span>
       </div>
-      <button className="btn btn-success btn-block text-white text-xl">
+      <Link
+        to="/login"
+        className="btn btn-success btn-block text-white text-xl"
+      >
         Check out
-      </button>
+      </Link>
     </div>
   );
 };

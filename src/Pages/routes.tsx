@@ -5,6 +5,8 @@ import Layout from "./Layout";
 import CartPage from "./CartPage";
 import CheckoutPage from "./CheckoutPage";
 import ErrorPage from "./ErrorPage";
+import PrivateRoutes from "./private/PrivateRoutes";
+import LoginPage from "./LoginPage";
 
 const router = createBrowserRouter([
   {
@@ -32,9 +34,17 @@ const router = createBrowserRouter([
 
         element: <CheckoutPage />,
       },
+      {
+        path: "/login",
+
+        element: <LoginPage />,
+      },
     ],
   },
-  {},
+  {
+    element: <PrivateRoutes />,
+    children: [{}],
+  },
 ]);
 
 export default router;
