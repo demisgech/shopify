@@ -1,4 +1,4 @@
-import { Product } from "../hooks/useProducts";
+import { Product } from "../services/productService";
 import useProductStore from "../store/useProductStore";
 
 interface Props {

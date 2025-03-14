@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from "react";
 import CartContext from "./cartContext";
-import { Product } from "../hooks/useProducts";
+import { Product } from "../services/productService";
 
 interface Props {
   children: ReactNode;

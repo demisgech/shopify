@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { Product } from "../hooks/useProducts";
+import { Product } from "../services/productService";
 
 interface CartContextType {
   cart: Product[];

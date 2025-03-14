@@ -1,5 +1,5 @@
+import { Product } from "../services/productService";
 import useProductStore from "../store/useProductStore";
-import type { Product } from "../hooks/useProducts";
 
 interface Props {
   product: Product;
